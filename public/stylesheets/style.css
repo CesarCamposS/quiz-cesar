@@ -23,8 +23,13 @@ section > div {
 	padding: 20px;
 }
 
-header, nav, section {
-	background: #eee; text-align: center;
+header{
+	text-align:center;
+	background-color:#ddd;
+}
+nav, section {
+	background: #eee;
+	text-align: center;
 }
 
 footer {

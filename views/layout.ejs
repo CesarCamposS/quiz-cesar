@@ -32,13 +32,23 @@
       </nav>
 
       <section class="main" id="s1">
-        <%- body %>
+        <% if (errors.length) { %>
+          <span id='ErrorMsgs'>
+            Corregir errores: <br/>
+            <% for (var i in errors) { %>
+              <span> <%= errors[i].message %> </span><br />
+            <% } %>
+          </span>
+        <% } %>
+
+        <div><%- body %></div>
       </section>
 
       <footer class="main" id="f1">
-        <a href="https://github.com/CesarCamposS/quiz-cesar">
+        <p><a href="https://github.com/CesarCamposS/quiz-cesar">
           Mi proyecto en GitHub
-        </a>
+        </a></p>
+        <p><a href="http://es.wikipedia.org/wiki/quiz">¿Qué es un quiz?</a></p>
       </footer>
     </div>
   </body>

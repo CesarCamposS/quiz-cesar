@@ -2,7 +2,7 @@ body {
 	background: #333;
 }
 
-#page-wrap:after { 
+#page-wrap:after {
 	content: "Smartphone Layout";
 }
 
@@ -16,6 +16,10 @@ body {
 
 footer, input {
 	font-size: large;
+}
+
+.rem {
+	display: none;
 }
 
 #foto {

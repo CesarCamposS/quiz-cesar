@@ -43,16 +43,3 @@ exports.answer = function(req, res) {
     }
     res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado});
 };
-
-/*    models.Quiz.findById(req.params.quizId).then(function(quiz) {
-
-      if (req.query.respuesta === req.quiz.respuesta)
-      {
-        res.render('quizes/answer', {quiz: quiz, respuesta: 'Correcto'});
-      }
-      else
-      {
-        res.render('quizes/answer', {quiz: quiz, respuesta: 'Incorrecto'});
-      }
-    })
-};*/

@@ -29,7 +29,6 @@ exports.index= function(req, res) {
   }
 };
 */
-
 exports.index = function(req, res) {
   models.Quiz.findAll().then(
     function(quizes) {

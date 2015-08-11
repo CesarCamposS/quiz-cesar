@@ -29,13 +29,12 @@ app.use(partials());
 
 // Helpers dinamicos:
 app.use(function(req, res, next) {
-  if (!req.session.redir) {                                // si no existe lo inicializa
-    req.session.redir = '/';
+  // guardar path en session.redir para despues de logout volver a la misma vista del login
+  if (!req.path.match(/\/login|\/logout/)) {
+    req.session.redir = req.path;
   }
-  if (!req.path.match(/\/login|\/logout/)) {                 // guardar path en session.redir para despues de logout volver a la misma vista del login
-    req.session.redir = req.path;                        // req.path es le path de donde se hizo el login
-  }
-  res.locals.session = req.session;                        // Hacer visible req.session en las vistas
+  // Hacer visible req.session en las vistas
+  res.locals.session = req.session;
   next();
   });
 

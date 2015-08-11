@@ -1,4 +1,3 @@
-var methodOverride = require('method-override');
 var express = require('express');
 var routes = require('./routes/index');
 var path = require('path');
@@ -7,6 +6,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
+var methodOverride = require('method-override');
+var session = require('express-session');
 
 //var users = require('./routes/users');
 var app = express();
@@ -21,9 +22,23 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(cookieParser());
+app.use(cookieParser('Quiz 2015'));
+app.use(session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
+
+// Helpers dinamicos:
+app.use(function(req, res, next) {
+  if (!req.session.redir) {                                // si no existe lo inicializa
+    req.session.redir = '/';
+  }
+  if (!req.path.match(/\/login|\/logout/)) {                 // guardar path en session.redir para despues de logout volver a la misma vista del login
+    req.session.redir = req.path;                        // req.path es le path de donde se hizo el login
+  }
+  res.locals.session = req.session;                        // Hacer visible req.session en las vistas
+  next();
+  });
+
 
 app.use('/', routes);
 //app.use('/users', users);

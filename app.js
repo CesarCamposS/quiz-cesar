@@ -29,31 +29,17 @@ app.use(partials());
 
 // Helpers dinamicos:
 app.use(function(req, res, next) {
+
   // guardar path en session.redir para despues de logout volver a la misma vista del login
-/*
-app.use(function(req, res, next){
-  // guardar path en session.redir para después de login
->>>>>>> bca71c9280fde80e824625a5c04ad23953e869a1
   if (!req.path.match(/\/login|\/logout/)) {
     req.session.redir = req.path;
   }
+
   // Hacer visible req.session en las vistas
   res.locals.session = req.session;
   next();
-<<<<<<< HEAD
   });
 });
-*/
-app.use(function(req, res, next) {
-  if (!req.session.redir) {                                // si no existe lo inicializa
-    req.session.redir = '/';
-  }
-  if (!req.path.match(/\/login|\/logout/)) {                 // guardar path en session.redir para despues de logout volver a la misma vista del login
-    req.session.redir = req.path;                        // req.path es le path de donde se hizo el login
-  }
-  res.locals.session = req.session;                        // Hacer visible req.session en las vistas
-  next();
-  });
 
 app.use('/', routes);
 //app.use('/users', users);

@@ -32,7 +32,7 @@ exports.author = function(req, res) {
 // GET /quizes/:id
 exports.show = function(req, res) {
     models.Quiz.findById(req.params.quizId).then(function(quiz) {
-	res.render('quizes/show', { quiz: quiz, errors: []})
+	res.render('quizes/show', { quiz: req.quiz, errors: []})
     })
 };
 

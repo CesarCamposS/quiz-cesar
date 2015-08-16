@@ -75,5 +75,21 @@ app.use(function(err, req, res, next) {
     });
 });
 
+// Auto-logout
+
+app.use(function(req, res, next){
+  if (req.session.user){
+    var horaActual = new Date();
+    console.log("APP.JS -- Fecha de expiración: " + req.session.cookie.expires + "\n Valor de tiempoLimite:"+
+    req.session.user.tiempoLim + "\n Usuario: "+ req.session.user.username);
+    if (req.session.user.tiempoLim < horaActual){
+      req.session.cookie.expires = new Date(Date.now() + 12000);
+      req.session.user.tiempoLim= req.session.cookie.expires;
+    }
+  }else{
+    console.log("No hay sesión inic");
+  }
+  next();
+});
 
 module.exports = app;

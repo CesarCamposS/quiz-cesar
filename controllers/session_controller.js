@@ -32,8 +32,16 @@ exports.create = function(req, res){
 		// Crear req.session.user y guardar campos id y username
 		// La sesión se define por la existencia de: req.session.user
 		req.session.user = {id:user.id, username:user.username};
-		res.redirect(req.session.redir.toString()); // Redicciona al path anterior al login
+    var fecha = new Date();
+    var fecha = new Date(fecha.getTime()+120000);
+    var minInicio = fecha.getMinutes() - 2;
+    req.session.user.tiempoLim =  fecha;
+    req.session.cookie.expires =  fecha;
+    
+    console.log("\nInicio de sesión: " + fecha.getHours() + ":" + minInicio + ":" + fecha.getSeconds());
+    console.log("\nCaducidad de la sesión por inactividad: "+ fecha.getHours() + ":" +fecha.getMinutes() + ":" + fecha.getSeconds() + "\n");
 
+		res.redirect(req.session.redir.toString()); // Redicciona al path anterior al login
 	});
 };
 

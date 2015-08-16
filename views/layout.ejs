@@ -32,8 +32,10 @@
         <%if(!session.user){%>
           <span class="right"><a href="/login">Login</a></span>
         <%}else{%>
-          <span class="right"><%=session.user.username%> <a href="/logout">Logout</a></span>
+          <br /><span class="right"><%=session.user.username%></span>
+          <span class="right"><a href="/logout">Logout</a></span>
         <%}%>
+
       </nav>
 
       <section class="main" id="s1">

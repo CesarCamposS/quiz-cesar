@@ -1,3 +1,11 @@
+<% if (session.autoLogout == true && session.time != "undefined") { %>
+<span id='ErrorMsgs'>
+Auto-logout:<br/>
+<span>Su sesión ha caducado tras 2 min de inactividad. Vuelva a loguearse</span><br/>
+</span>
+<% session.autoLogout = false %>
+<% } %>
+
 <h2>Login</h2>
 <form method='POST' action='/login'>
   <div class="field">

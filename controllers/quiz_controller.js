@@ -15,13 +15,25 @@ exports.load = function(req, res, next, quizId) {
 };
 
 // GET /quizes
-
-exports.index = function(req, res) {
-  models.Quiz.findAll().then(
-    function(quizes) {
-      res.render('quizes/index.ejs', {quizes: quizes, errors: []});
-    }
-  ).catch(function(error){next(error)});
+exports.index = function(req, res, next) {
+	if(req.query.search){
+		var condition = ('%' + req.query.search + '%').replace(/ /g,'%');
+		//var search = (req.query.search).replace(" ","%");
+		models.Quiz.findAll({
+			where:['lower(pregunta) like lower(?)', condition],
+			order:['pregunta']
+		}).then(function(quizes){
+			res.render('quizes/index.ejs', {quizes: quizes, errors: []});
+		}).catch(function(error) {
+			next(errors);
+		});
+	} else {
+		models.Quiz.findAll().then(function(quizes) {
+			res.render('quizes/index', { quizes: quizes, errors: []});
+		}).catch(function(error) {
+			next(errors);
+		})
+	}
 };
 
 //GET /author

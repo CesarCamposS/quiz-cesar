@@ -1,8 +1,16 @@
 <table>
+		<tr>
+		<td style="border-bottom: 1px solid black;">Pregunta</td>
+		<td width="50px"></td>
+		<td style="border-bottom: 1px solid black;">Tema</td>
+		</tr>
+		<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 	<%var i; for (i=0; i < quizes.length; i++) { %>
 		<tr>
 		  <td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
+			<td width: 50px></td>
 			<td class="rem"><%= quizes[i].tema %></td>
+			<td width="20px"></td>
 	    <%if(session.user){%><td><a href="quizes/<%= quizes[i].id %>/edit"><button>editar</button></a></td>
 				<td>
 				  <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
